@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import Counter from "./Counter";
+import { observer } from "mobx-react";
 
+@observer
 class App extends Component {
   render() {
     return (
@@ -11,7 +13,8 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
         </header>
-        <Counter />
+        <h3>{this.props.appState.counter}</h3>
+        <Counter increment={this.props.appState.increment} decrement={this.props.appState.decrement} />
       </div>
     );
   }
