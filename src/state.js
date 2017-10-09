@@ -1,14 +1,10 @@
 import { observable, action } from "mobx";
 import {create} from "apisauce";
-
-
-const api = create({
-  baseURL: "https://api.github.com"
-})
-
+import Api from "./Api"
 
 var appState = observable({
   counter: 0,
+  Api: Api,
   userInformation: {},
   increment: action.bound(function() {
     this.counter++;
@@ -17,7 +13,7 @@ var appState = observable({
     this.counter--;
   }),
   getUserInformation: action.bound(function(){
-    api.get("/users/knewter").then(response =>  { this.userInformation = response.data })
+    this.Api.getUserInformation().then(response =>  { this.userInformation = response.data })
   })
 });
 
